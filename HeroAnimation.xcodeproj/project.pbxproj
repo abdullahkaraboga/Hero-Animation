@@ -14,6 +14,8 @@
 		7B63EBD829AA45B3003EEE09 /* HeroAnimationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B63EBD729AA45B3003EEE09 /* HeroAnimationTests.swift */; };
 		7B63EBE229AA45B3003EEE09 /* HeroAnimationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B63EBE129AA45B3003EEE09 /* HeroAnimationUITests.swift */; };
 		7B63EBE429AA45B3003EEE09 /* HeroAnimationUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B63EBE329AA45B3003EEE09 /* HeroAnimationUITestsLaunchTests.swift */; };
+		7BA1E9FF29AA9C11006A95BB /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA1E9FE29AA9C11006A95BB /* Home.swift */; };
+		7BA1EA0129AA9C32006A95BB /* Today.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA1EA0029AA9C32006A95BB /* Today.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		7B63EBDD29AA45B3003EEE09 /* HeroAnimationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HeroAnimationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B63EBE129AA45B3003EEE09 /* HeroAnimationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroAnimationUITests.swift; sourceTree = "<group>"; };
 		7B63EBE329AA45B3003EEE09 /* HeroAnimationUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroAnimationUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		7BA1E9FE29AA9C11006A95BB /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		7BA1EA0029AA9C32006A95BB /* Today.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Today.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +98,8 @@
 		7B63EBC529AA45AE003EEE09 /* HeroAnimation */ = {
 			isa = PBXGroup;
 			children = (
+				7BA1E9FD29AA9BD9006A95BB /* View */,
+				7BA1E9FC29AA9BD1006A95BB /* Model */,
 				7B63EBC629AA45AE003EEE09 /* HeroAnimationApp.swift */,
 				7B63EBC829AA45AE003EEE09 /* ContentView.swift */,
 				7B63EBCA29AA45B3003EEE09 /* Assets.xcassets */,
@@ -125,6 +131,22 @@
 				7B63EBE329AA45B3003EEE09 /* HeroAnimationUITestsLaunchTests.swift */,
 			);
 			path = HeroAnimationUITests;
+			sourceTree = "<group>";
+		};
+		7BA1E9FC29AA9BD1006A95BB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7BA1EA0029AA9C32006A95BB /* Today.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7BA1E9FD29AA9BD9006A95BB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7BA1E9FE29AA9C11006A95BB /* Home.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,7 +280,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B63EBC929AA45AE003EEE09 /* ContentView.swift in Sources */,
+				7BA1E9FF29AA9C11006A95BB /* Home.swift in Sources */,
 				7B63EBC729AA45AE003EEE09 /* HeroAnimationApp.swift in Sources */,
+				7BA1EA0129AA9C32006A95BB /* Today.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

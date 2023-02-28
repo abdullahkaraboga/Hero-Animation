@@ -21,5 +21,6 @@ struct Today: Identifiable {
 
 var todayItems: [Today] = [
 
-    Today(itemName: "fds", itemDescription: "dfss", itemLogo: "fsdz", bannerTitle: "asf", platformTitle: "sdfs", artwork: "sfsdf")
+    Today(itemName: "fds", itemDescription: "dfss", itemLogo: "Logo1", bannerTitle: "asf", platformTitle: "sdfs", artwork: "Post1"),
+    Today(itemName: "fds", itemDescription: "dfss", itemLogo: "Logo2", bannerTitle: "asf", platformTitle: "sdfs", artwork: "Post2")
 ]

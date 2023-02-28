@@ -16,6 +16,7 @@
 		7B63EBE429AA45B3003EEE09 /* HeroAnimationUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B63EBE329AA45B3003EEE09 /* HeroAnimationUITestsLaunchTests.swift */; };
 		7BA1E9FF29AA9C11006A95BB /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA1E9FE29AA9C11006A95BB /* Home.swift */; };
 		7BA1EA0129AA9C32006A95BB /* Today.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA1EA0029AA9C32006A95BB /* Today.swift */; };
+		7BA1EA0329AAA71F006A95BB /* CustomCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA1EA0229AAA71F006A95BB /* CustomCorner.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		7B63EBE329AA45B3003EEE09 /* HeroAnimationUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroAnimationUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7BA1E9FE29AA9C11006A95BB /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		7BA1EA0029AA9C32006A95BB /* Today.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Today.swift; sourceTree = "<group>"; };
+		7BA1EA0229AAA71F006A95BB /* CustomCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCorner.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				7BA1E9FE29AA9C11006A95BB /* Home.swift */,
+				7BA1EA0229AAA71F006A95BB /* CustomCorner.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B63EBC929AA45AE003EEE09 /* ContentView.swift in Sources */,
+				7BA1EA0329AAA71F006A95BB /* CustomCorner.swift in Sources */,
 				7BA1E9FF29AA9C11006A95BB /* Home.swift in Sources */,
 				7B63EBC729AA45AE003EEE09 /* HeroAnimationApp.swift in Sources */,
 				7BA1EA0129AA9C32006A95BB /* Today.swift in Sources */,

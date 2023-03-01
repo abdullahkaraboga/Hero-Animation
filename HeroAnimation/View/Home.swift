@@ -8,10 +8,19 @@
 import SwiftUI
 
 struct Home: View {
-    
-    @State var currentItem : Today?
-    @State var showDetailPage : Bool = false
-    
+
+    @State var currentItem: Today?
+
+    @State var showDetailPage: Bool = false
+
+    @Namespace var animation
+
+    @State var animateView: Bool = false
+
+    @State var animateContent: Bool = false
+
+    @State var scrollOffset: CGFloat = 0
+
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
 
@@ -38,10 +47,11 @@ struct Home: View {
                 }
                     .padding(.horizontal)
                     .padding(.bottom)
+                    .opacity(showDetailPage ? 0 : 1)
 
                 ForEach(todayItems) { item in
                     Button {
-                        withAnimation(.interactiveSpring(response: 0.6,dampingFraction: 0.7,blendDuration: 0.7)){
+                        withAnimation(.interactiveSpring(response: 0.6, dampingFraction: 0.7, blendDuration: 0.7)) {
                             currentItem = item
                             showDetailPage = true
                         }
@@ -50,14 +60,23 @@ struct Home: View {
                         CardView(item: item)
                             .scaleEffect(currentItem?.id == item.id && showDetailPage ? 1 : 0.93)
                     }.buttonStyle(ScaledButtonStyle())
-
+                        .opacity(showDetailPage ? (currentItem?.id == item.id && showDetailPage ? 1 : 0) : 1)
                 }
             }.padding(.vertical)
         }
-        .overlay {
-            if let currentItem = currentItem,showDetailPage{
-                
+            .overlay {
+            if let currentItem = currentItem, showDetailPage {
+                DetailView(item: currentItem)
+                    .ignoresSafeArea(.container, edges: .top)
             }
+        }
+            .background(alignment: .top) {
+            RoundedRectangle(cornerRadius: 15, style: .continuous)
+                .fill(Color("BG"))
+                .frame(height: animateView ? nil : 350, alignment: .top)
+                .scaleEffect(animateView ? 1 : 0.93)
+                .opacity(animateView ? 1 : 0)
+                .ignoresSafeArea()
         }
     }
     @ViewBuilder
@@ -118,16 +137,92 @@ struct Home: View {
             }
                 .padding([.horizontal, .bottom])
 
-            LinearGradient(colors: [
-                    .black.opacity(0.5),
-                    .black.opacity(0.2),
-                    .clear
 
-            ], startPoint: .top, endPoint: .bottom)
         }
-            .background(RoundedRectangle(cornerRadius: 15, style: .continuous).fill(.gray.opacity(0.09)))
+            .background {
+            RoundedRectangle(cornerRadius: 15, style: .continuous).fill(.gray.opacity(0.09))
+        }
+            .matchedGeometryEffect(id: item.id, in: animation)
+    }
+
+    func DetailView(item: Today) -> some View {
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack {
+                CardView(item: item)
+
+                VStack(spacing: 15) {
+
+                    Text("dummy Text")
+                        .multilineTextAlignment(.leading)
+                        .lineSpacing(10)
+                        .padding(.bottom, 20)
+
+                    Divider()
+
+                    Button {
+
+                    } label: {
+                        Label {
+                            Text("Share Image")
+
+                        } icon: {
+                            Image(systemName: "square.and.arrow.up.fill")
+                        }
+                            .foregroundColor(.primary)
+                            .padding(.vertical, 10)
+                            .padding(.horizontal, 25)
+                            .background {
+                            RoundedRectangle(cornerRadius: 5, style: .continuous).fill(.ultraThinMaterial)
+                        }
+                    }
+
+                }
+                    .padding()
+                    .offset(y: scrollOffset > 0 ? -scrollOffset : 0)
+                    .opacity(animateContent ? 1 : 0)
+                    .scaleEffect(animateView ? 1 : 0, anchor: .top)
+            }
+                .offset(y: scrollOffset > 0 ? -scrollOffset : 0)
+                .offset(offset: $scrollOffset)
+        }
+            .coordinateSpace(name: "SCROLL")
+            .overlay(alignment: .topTrailing, content: {
+            Button {
+                withAnimation(.interactiveSpring(response: 0.6, dampingFraction: 0.7, blendDuration: 0.7)) {
+                    animateView = false
+                    animateContent = false
+                }
+
+                withAnimation(.interactiveSpring(response: 0.6, dampingFraction: 0.7, blendDuration: 0.7)) {
+                    currentItem = nil
+                    showDetailPage = true
+                }
+
+            } label: {
+                Image(systemName: "xmark.circle.fill")
+                    .font(.title)
+                    .foregroundColor(.white)
+            }
+                .padding()
+                .padding(.top)
+                .offset(y: -10)
+                .opacity(animateView ? 1 : 0)
+
+        })
+            .onAppear {
+            withAnimation(.interactiveSpring(response: 0.6, dampingFraction: 0.7, blendDuration: 0.7)) {
+                animateView = true
+            }
+
+            withAnimation(.interactiveSpring(response: 0.6, dampingFraction: 0.7, blendDuration: 0.7).delay(0.1)) {
+                animateContent = true
+            }
+        }
+            .transition(.identity)
     }
 }
+
+
 
 
 struct Home_Previews: PreviewProvider {
@@ -141,5 +236,29 @@ struct ScaledButtonStyle: ButtonStyle {
         configuration.label
             .scaleEffect(configuration.isPressed ? 0.94 : 1)
             .animation(.easeOut, value: configuration.isPressed)
+    }
+}
+
+extension View {
+    func offset(offset: Binding<CGFloat>) -> some View {
+        return self.overlay {
+            GeometryReader { proxy in
+                let minY = proxy.frame(in: .named("SCROLL")).minY
+
+                Color.clear
+                    .preference(key: OffsetKey.self, value: minY)
+            }
+                .onPreferenceChange(OffsetKey.self) { value in
+                offset.wrappedValue = value
+            }
+        }
+    }
+}
+
+struct OffsetKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
     }
 }
